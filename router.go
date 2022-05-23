@@ -1,6 +1,7 @@
 package main
 
 import (
+	healthcheck_controller "desafio_luizalabs/controllers/healthcheck"
 	"desafio_luizalabs/middlewares"
 
 	"github.com/gin-gonic/gin"
@@ -17,6 +18,7 @@ func setupGlobalMiddlewares(router *gin.Engine) {
 }
 
 func setupHealthCheckRoutes(router *gin.Engine) {
+	router.GET("/ping", healthcheck_controller.Ping())
 }
 
 func setupApplicationRoutes(router *gin.Engine) {
