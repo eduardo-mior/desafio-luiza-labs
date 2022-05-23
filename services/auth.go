@@ -11,7 +11,7 @@ import (
 
 type ServiceAuth struct{}
 
-func (*ServiceAuth) GenerateTokenJWT() (string, error) {
+func (ServiceAuth) GenerateTokenJWT() (string, error) {
 	now := time.Now().UTC()
 
 	// Gerando um ID unico para o token

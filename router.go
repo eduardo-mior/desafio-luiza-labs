@@ -32,7 +32,7 @@ func setupApplicationRoutes(router *gin.Engine) {
 
 	cepRepository := repositories.RepositoryCEP{}
 	cepService := services.ServiceCEP{IRepositoryCEP: &cepRepository}
-	router.GET("/buscar-cep/:cep", cep_controller.BuscarCEP(cepService))
+	router.GET("/buscar-cep/:cep", middlewares.AuthJWT(), cep_controller.BuscarCEP(cepService))
 
 }
 
