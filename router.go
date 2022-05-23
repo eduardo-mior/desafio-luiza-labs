@@ -1,8 +1,10 @@
 package main
 
 import (
+	auth_controller "desafio_luizalabs/controllers/auth"
 	healthcheck_controller "desafio_luizalabs/controllers/healthcheck"
 	"desafio_luizalabs/middlewares"
+	"desafio_luizalabs/services"
 
 	"github.com/gin-gonic/gin"
 )
@@ -22,7 +24,10 @@ func setupHealthCheckRoutes(router *gin.Engine) {
 }
 
 func setupApplicationRoutes(router *gin.Engine) {
-	_ = router.Group("", middlewares.AuthJWT()) // Grupo de rotas que serão protegidos por autenticação JWT
+
+	jwtService := services.ServiceAuth{}
+	router.GET("/gerar-token-jwt", auth_controller.GerarTokenJWT(&jwtService))
+
 }
 
 func setupSwaggerDocumentationRoutes(router *gin.Engine) {
