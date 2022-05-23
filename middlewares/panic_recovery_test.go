@@ -33,6 +33,6 @@ func TestPanicRecovery(t *testing.T) {
 	assert.Equal(t, nil, err)
 
 	assert.Equal(t, 500, response.Code)
-	assert.Equal(t, viewmodels.Error{Error: Erro500Interno}, responseBody)
+	assert.Equal(t, viewmodels.Error{Error: erro500Interno}, responseBody)
 
 }

@@ -33,6 +33,6 @@ func TestMiddlewareNotFound(t *testing.T) {
 	assert.Equal(t, nil, err)
 
 	assert.Equal(t, 404, response.Code)
-	assert.Equal(t, viewmodels.Error{Error: Erro404RecursoNaoEncontrado}, responseBody)
+	assert.Equal(t, viewmodels.Error{Error: erro404RecursoNaoEncontrado}, responseBody)
 
 }

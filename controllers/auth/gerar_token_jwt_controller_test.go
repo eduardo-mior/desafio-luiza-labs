@@ -45,7 +45,7 @@ func TestGerarTokenJWTErro(t *testing.T) {
 	err := json.NewDecoder(response.Body).Decode(&responseBody)
 	assert.Equal(t, nil, err)
 
-	assert.Equal(t, 500, response.Result().StatusCode)
+	assert.Equal(t, 500, response.Code)
 	assert.Equal(t, viewmodels.Error{Error: responseBody.Error}, responseBody)
 
 }

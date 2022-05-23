@@ -11,10 +11,10 @@ const (
 	erroAoGerarToken = "Erro interno ao tentar gerar o token JWT"
 )
 
-func GerarTokenJWT(authService domain.IServiceAuth) gin.HandlerFunc {
+func GerarTokenJWT(serviceAuth domain.IServiceAuth) gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		token, err := authService.GenerateTokenJWT()
+		token, err := serviceAuth.GenerateTokenJWT()
 		if err != nil {
 			c.AbortWithStatusJSON(500, viewmodels.Error{Error: erroAoGerarToken})
 			return
