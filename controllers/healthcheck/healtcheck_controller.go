@@ -11,7 +11,7 @@ const (
 	UnvailableStatus = "unavailable"
 )
 
-func Ping() gin.HandlerFunc {
+func HealthCheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.JSON(200, viewmodels.HealthCheck{Status: AvailableStatus})
 	}

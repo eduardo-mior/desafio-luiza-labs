@@ -18,7 +18,7 @@ func setupGlobalMiddlewares(router *gin.Engine) {
 }
 
 func setupHealthCheckRoutes(router *gin.Engine) {
-	router.GET("/ping", healthcheck_controller.Ping())
+	router.GET("/health-check", healthcheck_controller.HealthCheck())
 }
 
 func setupApplicationRoutes(router *gin.Engine) {

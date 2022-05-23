@@ -10,11 +10,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPing(t *testing.T) {
+func TestHealthCheck(t *testing.T) {
 
 	response := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(response)
-	Ping()(c)
+	HealthCheck()(c)
 
 	responseBody := viewmodels.HealthCheck{}
 	err := json.NewDecoder(response.Body).Decode(&responseBody)
