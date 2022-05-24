@@ -12,6 +12,7 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	swaggerGin "github.com/swaggo/gin-swagger"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,6 +20,10 @@ func initRouter() *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	return router
+}
+
+func enableCORS(router *gin.Engine) {
+	router.Use(cors.Default())
 }
 
 func setupGlobalMiddlewares(router *gin.Engine) {

@@ -7,6 +7,7 @@ func main() {
 
 	router := initRouter()
 
+	enableCORS(router)
 	setupGlobalMiddlewares(router)
 	setupHealthCheckRoutes(router)
 	setupApplicationRoutes(router)
