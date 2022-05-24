@@ -7,7 +7,7 @@ type InformacoesCEP struct {
 	Cidade string `json:"cidade" example:"Marau"`
 	Bairro string `json:"bairro" example:"Av. Julio Borella"`
 	Rua    string `json:"rua"    example:"Rua costa silva"`
-}
+} // @name InformacoesCEP
 
 func (informacoesCEP *InformacoesCEP) FromDomainCEP(domainCEP domain.InformacoesCEP) {
 	informacoesCEP.UF = domainCEP.UF

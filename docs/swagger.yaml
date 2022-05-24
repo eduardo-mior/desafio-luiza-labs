@@ -1,0 +1,119 @@
+definitions:
+  AuthError:
+    properties:
+      authError:
+        example: Token de autenticação inválido
+        type: string
+    type: object
+  Error:
+    properties:
+      error:
+        example: Ocorreu um erro ao tentar realizar a operação
+        type: string
+    type: object
+  HealthCheck:
+    properties:
+      status:
+        example: available
+        type: string
+    type: object
+  InformacoesCEP:
+    properties:
+      bairro:
+        example: Av. Julio Borella
+        type: string
+      cidade:
+        example: Marau
+        type: string
+      rua:
+        example: Rua costa silva
+        type: string
+      uf:
+        example: RS
+        type: string
+    type: object
+  Token:
+    properties:
+      token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UifQ.b-bQWDLukCsP-kz255shgiDNoPjycxSizc1cIljoEic
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /buscar-cep/{cep}:
+    get:
+      description: Busca todas as informações de um cep retornando o estado (UF) o
+        nome da cidade, o bairro e a rua de um CEP.
+      parameters:
+      - description: CEP da localidade
+        in: path
+        maxLength: 8
+        minLength: 8
+        name: cep
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/InformacoesCEP'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/AuthError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Buscar as informações de um CEP
+      tags:
+      - CEP
+  /gerar-token-jwt:
+    get:
+      description: Gera um token JWT de testes válido por 1 dia.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Token'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Gerar um token JWT de testes
+      tags:
+      - Auth
+  /health-check:
+    get:
+      description: Testa a conectividade da API.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/HealthCheck'
+      summary: Testar a conectividade da API
+      tags:
+      - HealthCheck
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

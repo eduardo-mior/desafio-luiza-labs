@@ -1,5 +1,8 @@
 package main
 
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 
 	router := initRouter()

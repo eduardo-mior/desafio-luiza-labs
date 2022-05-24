@@ -4,9 +4,13 @@ import (
 	auth_controller "desafio_luizalabs/controllers/auth"
 	cep_controller "desafio_luizalabs/controllers/cep"
 	healthcheck_controller "desafio_luizalabs/controllers/healthcheck"
+	docs "desafio_luizalabs/docs"
 	"desafio_luizalabs/middlewares"
 	"desafio_luizalabs/repositories"
 	"desafio_luizalabs/services"
+
+	swaggerFiles "github.com/swaggo/files"
+	swaggerGin "github.com/swaggo/gin-swagger"
 
 	"github.com/gin-gonic/gin"
 )
@@ -37,4 +41,13 @@ func setupApplicationRoutes(router *gin.Engine) {
 }
 
 func setupSwaggerDocumentationRoutes(router *gin.Engine) {
+
+	docs.SwaggerInfo.Title = "Desafio Luiza Labs"
+	docs.SwaggerInfo.Description = "Documentação da API de Consulta de CEP"
+	docs.SwaggerInfo.Version = "1.0.0"
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
+
+	swagger := router.Group("/docs")
+	swagger.GET("/*any", swaggerGin.WrapHandler(swaggerFiles.Handler))
+
 }

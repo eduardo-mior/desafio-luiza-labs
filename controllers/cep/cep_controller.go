@@ -11,6 +11,16 @@ const (
 	erroAoBuscarCEP = "Erro interno ao tentar buscar as informações do CEP"
 )
 
+// @Tags CEP
+// @Summary Buscar as informações de um CEP
+// @Description Busca todas as informações de um cep retornando o estado (UF) o nome da cidade, o bairro e a rua de um CEP.
+// @Produce json
+// @Security ApiKeyAuth
+// @Param cep path string true "CEP da localidade" minlength(8) maxlength(8)
+// @Success 200 {object} viewmodels.InformacoesCEP
+// @Failure 400,500 {object} viewmodels.Error
+// @Failure 401 {object} viewmodels.AuthError
+// @Router /buscar-cep/{cep} [get]
 func BuscarCEP(serviceCEP domain.IServiceCEP) gin.HandlerFunc {
 	return func(c *gin.Context) {
 

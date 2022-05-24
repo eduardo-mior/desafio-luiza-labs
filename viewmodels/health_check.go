@@ -1,5 +1,5 @@
 package viewmodels
 
 type HealthCheck struct {
-	Status string `json:"status" example:"availabel"`
-}
+	Status string `json:"status" example:"available"`
+} // @name HealthCheck
