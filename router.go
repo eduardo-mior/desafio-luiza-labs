@@ -16,6 +16,7 @@ import (
 )
 
 func initRouter() *gin.Engine {
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	return router
 }

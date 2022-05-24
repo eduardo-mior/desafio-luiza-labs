@@ -49,8 +49,8 @@ func TestBuscarCEPErroCepInvalido(t *testing.T) {
 	err := errors.New(expectedError.Error)
 
 	serviceCEP.
-		On("IsErrCepInvalido", err).Return(true).
-		On("BuscarCEPRecursivo", "99150000").Return(domain.InformacoesCEP{}, err)
+		On("BuscarCEPRecursivo", "99150000").Return(domain.InformacoesCEP{}, err).
+		On("IsErrCepInvalido", err).Return(true)
 
 	BuscarCEP(serviceCEP)(c)
 
@@ -75,8 +75,8 @@ func TestBuscarCEPErroInesperado(t *testing.T) {
 	err := errors.New(expectedError.Error)
 
 	serviceCEP.
-		On("IsErrCepInvalido", err).Return(false).
-		On("BuscarCEPRecursivo", "99150000").Return(domain.InformacoesCEP{}, err)
+		On("BuscarCEPRecursivo", "99150000").Return(domain.InformacoesCEP{}, err).
+		On("IsErrCepInvalido", err).Return(false)
 
 	BuscarCEP(serviceCEP)(c)
 
