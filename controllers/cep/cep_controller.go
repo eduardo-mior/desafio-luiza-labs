@@ -9,6 +9,7 @@ import (
 
 const (
 	erroAoBuscarCEP = "Erro interno ao tentar buscar as informações do CEP"
+	errCepInvalido  = "CEP inválido"
 )
 
 // @Tags CEP
@@ -25,6 +26,10 @@ func BuscarCEP(serviceCEP domain.IServiceCEP) gin.HandlerFunc {
 	return func(c *gin.Context) {
 
 		cep := c.Param("cep")
+		if len(cep) != 8 {
+			c.AbortWithStatusJSON(400, viewmodels.Error{Error: errCepInvalido})
+			return
+		}
 
 		cepInformacoes, err := serviceCEP.BuscarCEPRecursivo(cep)
 		if err != nil {
