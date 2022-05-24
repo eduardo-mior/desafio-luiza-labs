@@ -7,7 +7,7 @@ Implementação do Desafio Técnico da LuizaLabs.
 A linguagem escolhida para desenvolver o desafio foi a linguagem [GO](https://go.dev/) pelo fato de que GO é uma linguagem de programação simples, onde os códigos podem ser lidos e escritos com facilidade, e que além disso possui uma alta performance e escalabilidade.
 
 ### Arquitetura
-A arquitetura implementada no projeto segue os conceitos da CleanArchitecture e os princípios SOLID, com baixo acoplamento, separação de interesses, injeção de dependências, mock de dados e testes unitários.
+A arquitetura implementada no projeto segue os conceitos da [CleanArchitecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) e os princípios SOLID, com baixo acoplamento, separação de interesses, injeção de dependências, mock de dados e testes unitários.
 
 Todo o trafego de dados ocorre no padrão `application/json`.
 
