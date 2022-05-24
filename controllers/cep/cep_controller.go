@@ -28,6 +28,9 @@ func BuscarCEP(serviceCEP domain.IServiceCEP) gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(200, cepInformacoes)
+		cepResponse := viewmodels.InformacoesCEP{}
+		cepResponse.FromDomainCEP(cepInformacoes)
+
+		c.JSON(200, cepResponse)
 	}
 }

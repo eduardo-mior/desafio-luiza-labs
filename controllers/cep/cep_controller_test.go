@@ -22,16 +22,18 @@ func TestBuscarCEPSucesso(t *testing.T) {
 	c.Params = gin.Params{{Key: "cep", Value: "01001000"}}
 
 	expectedCEP := domain.InformacoesCEP{UF: "SP", Cidade: "São Paulo", Bairro: "Sé", Rua: "Praça da Sé"}
-
 	serviceCEP.On("BuscarCEPRecursivo", "01001000").Return(expectedCEP, nil)
 	BuscarCEP(serviceCEP)(c)
 
-	responseBody := domain.InformacoesCEP{}
+	responseBody := viewmodels.InformacoesCEP{}
 	err := json.NewDecoder(response.Body).Decode(&responseBody)
 	assert.Equal(t, nil, err)
 
+	expectedResponseCEP := viewmodels.InformacoesCEP{}
+	expectedResponseCEP.FromDomainCEP(expectedCEP)
+
 	assert.Equal(t, 200, response.Code)
-	assert.Equal(t, expectedCEP, responseBody)
+	assert.Equal(t, expectedResponseCEP, responseBody)
 
 }
 

@@ -103,7 +103,7 @@
 									"});",
 									"",
 									"pm.test(\"Verificar as informações do CEP\", function () {",
-									"    pm.expect(pm.response.json()).to.deep.equals({ \"UF\": \"SP\", \"Cidade\": \"São Paulo\", \"Bairro\": \"Sé\", \"Rua\": \"Praça da Sé\" });",
+									"    pm.expect(pm.response.json()).to.deep.equals({ \"uf\": \"SP\", \"cidade\": \"São Paulo\", \"bairro\": \"Sé\", \"rua\": \"Praça da Sé\" });",
 									"});"
 								],
 								"type": "text/javascript"
@@ -113,9 +113,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.sendRequest(\"http://localhost:8080/gerar-token-jwt\", function (err, response) {",
-									"    pm.variables.set(\"token\", response.json().token);",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -169,9 +167,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.sendRequest(\"http://localhost:8080/gerar-token-jwt\", function (err, response) {",
-									"    pm.variables.set(\"token\", response.json().token);",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -202,6 +198,28 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.sendRequest(\"http://localhost:8080/gerar-token-jwt\", function (err, response) {",
+							"    pm.variables.set(\"token\", response.json().token);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
