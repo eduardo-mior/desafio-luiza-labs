@@ -1,4 +1,6 @@
 # Desafio LuizaLabs
+![Build and Test Status](https://github.com/eduardo-mior/desafio-luiza-labs/actions/workflows/build_and_tests.yaml/badge.svg)
+
 Implementação do Desafio Técnico da LuizaLabs.
 
 ## 1 - Serviço de busca de CEP
