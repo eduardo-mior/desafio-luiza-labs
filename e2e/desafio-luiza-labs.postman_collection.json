@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "d3ff0a18-71fd-4bcb-ae1b-a9b9a69b806e",
+		"name": "Desafio LuizaLabs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7073921"
+	},
+	"item": [
+		{
+			"name": "HealthCheck",
+			"item": [
+				{
+					"name": "Verificar HealthCheck",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verificar o StatusCode retornado\", function () {",
+									"    pm.expect(pm.response.code).to.be.equals(200);",
+									"});",
+									"",
+									"pm.test(\"Verificar o Status da API\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).haveOwnProperty(\"status\");",
+									"    pm.expect(jsonData.status).to.equals(\"available\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/health-check",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"health-check"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Gerar Token JWT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verificar o StatusCode retornado\", function () {",
+									"    pm.expect(pm.response.code).to.be.equals(200);",
+									"});",
+									"",
+									"pm.test(\"Verificar token gerado\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).haveOwnProperty(\"token\");",
+									"    pm.expect(jsonData.token).is.not.empty;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/gerar-token-jwt",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"gerar-token-jwt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CEP",
+			"item": [
+				{
+					"name": "Buscar CEP Válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verificar o StatusCode retornado\", function () {",
+									"    pm.expect(pm.response.code).to.be.equals(200);",
+									"});",
+									"",
+									"pm.test(\"Verificar as informações do CEP\", function () {",
+									"    pm.expect(pm.response.json()).to.deep.equals({ \"UF\": \"SP\", \"Cidade\": \"São Paulo\", \"Bairro\": \"Sé\", \"Rua\": \"Praça da Sé\" });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest(\"http://localhost:8080/gerar-token-jwt\", function (err, response) {",
+									"    pm.variables.set(\"token\", response.json().token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/buscar-cep/01001000",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"buscar-cep",
+								"01001000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar CEP Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verificar o StatusCode retornado\", function () {",
+									"    pm.expect(pm.response.code).to.be.equals(400);",
+									"});",
+									"",
+									"pm.test(\"Verificar o erro retornado\", function () {",
+									"    pm.expect(pm.response.json()).to.deep.equals({ \"error\": \"CEP inválido\" });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest(\"http://localhost:8080/gerar-token-jwt\", function (err, response) {",
+									"    pm.variables.set(\"token\", response.json().token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/buscar-cep/99999999",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"buscar-cep",
+								"99999999"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "api_url",
+			"value": "http://localhost:8080"
+		}
+	]
+}
