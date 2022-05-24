@@ -1,7 +1,9 @@
 package middlewares
 
 import (
+	"desafio_luizalabs/util"
 	"desafio_luizalabs/viewmodels"
+	"fmt"
 	"runtime/debug"
 
 	"github.com/gin-gonic/gin"
@@ -20,6 +22,9 @@ func PanicRecovery() gin.HandlerFunc {
 				debug.PrintStack()
 
 				c.JSON(500, viewmodels.Error{Error: erro500Interno})
+
+				err := fmt.Errorf("%v", r)
+				util.GravarErroNoSentry(err, c)
 
 			}
 		}()

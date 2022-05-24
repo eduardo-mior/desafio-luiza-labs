@@ -5,9 +5,12 @@ package main
 // @name Authorization
 func main() {
 
+	initSentry()
+
 	router := initRouter()
 
 	enableCORS(router)
+	setupSentryMiddleware(router)
 	setupGlobalMiddlewares(router)
 	setupHealthCheckRoutes(router)
 	setupApplicationRoutes(router)

@@ -2,6 +2,7 @@ package auth_controller
 
 import (
 	"desafio_luizalabs/domain"
+	"desafio_luizalabs/util"
 	"desafio_luizalabs/viewmodels"
 
 	"github.com/gin-gonic/gin"
@@ -23,6 +24,7 @@ func GerarTokenJWT(serviceAuth domain.IServiceAuth) gin.HandlerFunc {
 
 		token, err := serviceAuth.GenerateTokenJWT()
 		if err != nil {
+			util.GravarErroNoSentry(err, c)
 			c.AbortWithStatusJSON(500, viewmodels.Error{Error: erroAoGerarToken})
 			return
 		}

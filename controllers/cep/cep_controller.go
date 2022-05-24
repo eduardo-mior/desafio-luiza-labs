@@ -2,6 +2,7 @@ package cep_controller
 
 import (
 	"desafio_luizalabs/domain"
+	"desafio_luizalabs/util"
 	"desafio_luizalabs/viewmodels"
 
 	"github.com/gin-gonic/gin"
@@ -35,8 +36,9 @@ func BuscarCEP(serviceCEP domain.IServiceCEP) gin.HandlerFunc {
 		if err != nil {
 
 			if serviceCEP.IsErrCepInvalido(err) {
-				c.AbortWithStatusJSON(400, viewmodels.Error{Error: err.Error()})
+				c.AbortWithStatusJSON(400, viewmodels.Error{Error: errCepInvalido})
 			} else {
+				util.GravarErroNoSentry(err, c)
 				c.AbortWithStatusJSON(500, viewmodels.Error{Error: erroAoBuscarCEP})
 			}
 

@@ -1,20 +1,19 @@
 # Desafio LuizaLabs
 Implementação do Desafio Técnico da LuizaLabs.
 
-#
-# 1 - Serviço de busca de CEP
+## 1 - Serviço de busca de CEP
 
-## Linguagem
+### Linguagem
 A linguagem escolhida para desenvolver o desafio foi a linguagem [GO](https://go.dev/) pelo fato de que GO é uma linguagem de programação simples, onde os códigos podem ser lidos e escritos com facilidade, e que além disso possui uma alta performance e escalabilidade.
 
-## Arquitetura
+### Arquitetura
 A arquitetura implementada no projeto segue os conceitos da CleanArchitecture e os princípios SOLID, com baixo acoplamento, separação de interesses, injeção de dependências, mock de dados e testes unitários.
 
 Todo o trafego de dados ocorre no padrão `application/json`.
 
 Para questões de segurança e autorização foi utilizado o padrão de tokens JWT.
 
-## Ferramentas
+### Ferramentas
 Para o desenvolvimento e implantação do projeto foram usadas as seguintes ferramentas:
 - [GIN](https://github.com/gin-gonic/gin): Framework WEB para tratamento das requisições HTTP.
 - [JWT](github.com/golang-jwt/jwt): Geração e validação dos tokens JWT.
@@ -22,9 +21,10 @@ Para o desenvolvimento e implantação do projeto foram usadas as seguintes ferr
 - [Testify](https://github.com/stretchr/testify): Conjunto de pacotes e funções utilitárias que ajudam no desenvolvimento dos testes unitários.
 - [Mockery](https://github.com/vektra/mockery): Gerador de Mocks para facilitar o desenvolvimento dos testes unitários.
 - [Postman](https://www.postman.com/): Ferramenda usada para criar os testes de ponta a ponta (e2e).
+- [Sentry](https://sentry.io/): Plataforma para trackeamento e monitoramento de erros.
 
-# 
-# 2 - Questão teórica
+
+## 2 - Questão teórica
 Questão: `Quando você digita a URL de um site (http://www.netshoes.com.br) no browser e pressiona enter, explique da forma que preferir, o que ocorre nesse processo do protocolo HTTP entre o Client e o Server?`
 
 Resposta: Ao acessar o site o http://www.netshoes.com.br o browser faz uma requisição do tipo GET para o servidor da netshoes que retorna uma resposta com StatusCode 307 (Internal Redirect) indicando ao Browser (Client) que é necessário fazer um redirecionamento, além do StatusCode 307 o servidor também retornou um cabeçalho chamado `Location`, este cabeçalho contém a URL de destinado para onde o browser deve redirecionar o usuário. 
