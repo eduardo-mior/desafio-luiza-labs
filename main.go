@@ -5,6 +5,8 @@ package main
 // @name Authorization
 func main() {
 
+	loadEnviromentVariables()
+
 	initSentry()
 
 	router := initRouter()
